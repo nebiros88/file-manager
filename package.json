@@ -17,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/nebiros88/file-manager/issues"
   },
-  "homepage": "https://github.com/nebiros88/file-manager#readme"
+  "homepage": "https://github.com/nebiros88/file-manager#readme",
+  "exports": {
+    ".": "./assets/"
+  }
 }
