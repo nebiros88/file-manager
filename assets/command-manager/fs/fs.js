@@ -50,3 +50,18 @@ export const rn = async (...params) => {
     console.log("Operation failed");
   }
 };
+
+export const rm = async (...params) => {
+  const [fileName] = params;
+  const src = path.join(currentPath.path, fileName);
+  try {
+    await fs.promises
+      .access(src)
+      .catch(() => console.log(`\nCan't find file: ${src}`));
+    await fs.promises
+      .rm(src)
+      .then(() => console.log("\nRemoved successfully!"));
+  } catch (error) {
+    console.log("Operation failed");
+  }
+};
