@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npm run start -- --username=your_username"
+    "start": "node index.js "
   },
   "repository": {
     "type": "git",
@@ -17,8 +17,5 @@
   "bugs": {
     "url": "https://github.com/nebiros88/file-manager/issues"
   },
-  "homepage": "https://github.com/nebiros88/file-manager#readme",
-  "exports": {
-    ".": "./assets/"
-  }
+  "homepage": "https://github.com/nebiros88/file-manager#readme"
 }
