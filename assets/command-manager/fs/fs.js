@@ -1,13 +1,9 @@
 import fs from "fs";
 import path from "path";
+
 import { getNormalizedPath, getCurrentPath } from "../../utils/utils.js";
 import { currentPath } from "../path.js";
-
-const ERRORS = {
-  INVALID_INPUT: "Invalid input.",
-  OPERATION_FAILED: "Operation failed.",
-  INVALID_FILE_NAME: "Invalid file name.",
-};
+import { ERRORS } from "../../constants.js";
 
 export const cat = async (...params) => {
   const [receivedPath] = params;
@@ -40,8 +36,8 @@ export const add = async (...params) => {
 
 export const rn = async (...params) => {
   const [oldFile, newFile] = params;
-  const src = path.join(currentPath.path, oldFile);
-  const newFileSrc = path.join(currentPath.path, newFile);
+  const src = getNormalizedPath(oldFile);
+  const newFileSrc = getNormalizedPath(newFile);
   try {
     await fs.promises.access(src).catch(() => console.log("\nCant find file to rename"));
     await fs.promises.rename(src, newFileSrc).then(() => console.log("Renamed successfully"));
