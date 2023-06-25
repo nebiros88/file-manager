@@ -1,8 +1,15 @@
 import { up, cd, ls } from "./navigation/navigations.js";
-import { cat, add, rn, rm } from "./fs/fs.js";
+import { cat, add, rn, cp, mv, rm } from "./fs/fs.js";
 import { hash } from "./hash/hash.js";
 
-const COMMANDS = { up, cd, ls, cat, add, rn, rm, hash };
+const NAV_CMD = { up, cd, ls };
+const FS_CMD = { cat, add, rn, cp, mv, rm };
+
+const COMMANDS = {
+  ...NAV_CMD,
+  ...FS_CMD,
+  hash,
+};
 
 export const commandManager = async (input) => {
   const inputParams = input.trim().split(/\s+/g);

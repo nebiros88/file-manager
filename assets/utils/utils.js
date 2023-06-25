@@ -12,8 +12,7 @@ export function greet() {
   if (list[0] === "--username" && list[1].length) {
     message = `Welcome to the File Manager, ${userName}!\n`;
   } else {
-    message =
-      "Wrong user name (please, run from cli -> npm run start -- --username=your_username).\n";
+    message = "Wrong user name (please, run from cli -> npm run start -- --username=your_username).\n";
   }
   stdout.write(message);
 }
