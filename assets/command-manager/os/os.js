@@ -10,21 +10,16 @@ export function os(...params) {
   switch (param) {
     case OS_PARAMS.EOL:
       return console.log(JSON.stringify(EOL));
-      break;
     case OS_PARAMS.CPUS:
       const cpusInfo = cpus();
       console.log(`Overall amount of CPUS is ${cpusInfo.length}`);
-      return cpusInfo.forEach((el, idx) => console.log(`${idx + 1}. model: ${el.model}`));
-      break;
+      return cpusInfo.forEach((el, idx) => console.log(`${idx + 1}. model: ${el.model}, clock rate: ${el.speed / 1000} GHz`));
     case OS_PARAMS.HOMEDIR:
       return console.log(homedir());
-      break;
     case OS_PARAMS.USERNAME:
       return console.log(userInfo().username);
-      break;
     case OS_PARAMS.ARCH:
       return console.log(arch());
-      break;
     default:
       return console.log(ERRORS.INVALID_INPUT);
   }

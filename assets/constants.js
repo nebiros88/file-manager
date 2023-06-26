@@ -11,3 +11,8 @@ export const OS_PARAMS = {
   USERNAME: "username",
   ARCH: "architecture",
 };
+
+export const COMPRESS = {
+  COMPRESSED: "Compressed sucsessfully.",
+  DECOMPRESSED: "Decompressed sucsessfully."
+}
