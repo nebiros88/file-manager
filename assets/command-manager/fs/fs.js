@@ -6,21 +6,32 @@ import { currentPath } from "../path.js";
 import { ERRORS } from "../../constants.js";
 
 export const cat = async (...params) => {
-  const [receivedPath] = params;
+  const [receivedPath, ] = params;
   if (!receivedPath || params.length > 1) return console.log(ERRORS.INVALID_INPUT);
-  try {
-    const newPath = getNormalizedPath(receivedPath);
 
+  const newPath = getNormalizedPath(receivedPath);
+
+  const readStreamPromise = new Promise((resolve, reject) => {
     let data = "";
     const readableStream = fs.createReadStream(newPath, "utf-8");
-    readableStream.on("data", (chunk) => (data += chunk));
-    readableStream.on("end", () => {
-      console.log(data);
-      return getCurrentPath();
+    readableStream.on("data", (chunk) => {
+      data += chunk;
     });
-    readableStream.on("error", (error) => console.log("Error", error.message));
+
+    readableStream.on('error', (error) => {
+      reject(error)
+    });
+
+    readableStream.on('end', () => {
+      console.log(data);
+      resolve(data);
+    });
+  });
+
+  try {
+    return await readStreamPromise;
   } catch (err) {
-    return console.log(ERRORS.OPERATION_FAILED);
+    console.log(ERRORS.OPERATION_FAILED);
   }
 };
 
