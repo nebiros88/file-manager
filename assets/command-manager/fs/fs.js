@@ -48,7 +48,7 @@ export const add = async (...params) => {
 export const rn = async (...params) => {
   const [oldFile, newFile] = params;
   const src = getNormalizedPath(oldFile);
-  const newFileSrc = getNormalizedPath(newFile);
+  const newFileSrc = path.join(path.dirname(src), newFile);
   try {
     await fs.promises.access(src).catch(() => console.log("\nCant find file to rename"));
     await fs.promises.rename(src, newFileSrc).then(() => console.log("Renamed successfully"));
@@ -74,9 +74,11 @@ export const cp = async (...params) => {
       .then(() => {
         const readStream = fs.createReadStream(srcFile, "utf-8");
         const writeStream = fs.createWriteStream(srcDirectory + "/" + fileName);
+
+        writeStream.on("error", (error) => console.log(ERRORS.OPERATION_FAILED));
         readStream.pipe(writeStream).on("finish", () => console.log("Copied successfully"));
       })
-      .catch(() => console.log(ERRORS.INVALID_FILE_NAME));
+      .catch((error) => console.log(ERRORS.INVALID_FILE_NAME));
   } catch (error) {
     console.log(ERRORS.OPERATION_FAILED);
   }
@@ -99,6 +101,7 @@ export const mv = async (...params) => {
       .then(() => {
         const readStream = fs.createReadStream(srcFile, "utf-8");
         const writeStream = fs.createWriteStream(srcDirectory + "/" + fileName);
+        writeStream.on("error", (err) => console.log(ERRORS.OPERATION_FAILED));
         readStream.pipe(writeStream).on("finish", () => console.log("Copied successfully"));
       })
       .then(async () => {

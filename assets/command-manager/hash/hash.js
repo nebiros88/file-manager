@@ -10,7 +10,7 @@ export const hash = async (...params) => {
 
   const src = getNormalizedPath(filePath);
   try {
-    await fs.promises.access(src).catch(() => console.log("\nCant find file to rename"));
+    await fs.promises.access(src).catch(() => console.log("\nCant find file"));
     const readableStream = await fs.promises.readFile(src);
     const hash = crypto.createHash("sha256");
     hash.update(readableStream);
