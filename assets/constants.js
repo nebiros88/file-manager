@@ -14,5 +14,5 @@ export const OS_PARAMS = {
 
 export const COMPRESS = {
   COMPRESSED: "Compressed sucsessfully.",
-  DECOMPRESSED: "Decompressed sucsessfully."
-}
+  DECOMPRESSED: "Decompressed sucsessfully.",
+};
